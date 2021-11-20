@@ -111,12 +111,14 @@ fi
 echo "Configuring DHCP server .."
 
 cat > "/etc/dhcp/dhcpd.conf" <<EOF
-option domain-name-servers 8.8.8.8, 8.8.4.4;
+#option domain-name-servers 8.8.8.8, 8.8.4.4;
+option domain-name-servers ${AP_ADDR};
 option subnet-mask 255.255.255.0;
 option routers ${AP_ADDR};
 subnet ${SUBNET} netmask 255.255.255.0 {
   range ${SUBNET::-1}100 ${SUBNET::-1}200;
 }
+#option default-url "http://192.168.254.1";
 EOF
 
 echo "Starting DHCP server .."
